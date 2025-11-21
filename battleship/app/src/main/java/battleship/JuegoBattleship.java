@@ -221,7 +221,7 @@ public class JuegoBattleship {
     }
     //metodo para colocar un solo barco, ayuda en test
     public void colocarBarco(int r, int c, String tipo){
-        //tableroPropio guarda caracteres
+        //tableroPropio guarda
         tableroPropio[r][c]= tipo.charAt(0);
     }
 }

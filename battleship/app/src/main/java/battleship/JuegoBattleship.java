@@ -5,13 +5,13 @@ import java.io.IOException;
 public class JuegoBattleship {
     private Tablero t;
     private Conexion conexion;
-    private TableroConsola tc;
+    private ITablero vista;
     private Jugador j;
 
-    public JuegoBattleship(Tablero t,  Conexion c, TableroConsola tc){
+    public JuegoBattleship(Tablero t,  Conexion c, ITablero vista){
         this.t= t;
         conexion= c;
-        this.tc = tc;
+        this.vista = vista;
     }
     //metodos de battleship p2p
 
@@ -37,7 +37,7 @@ public class JuegoBattleship {
         //usa tablero en lugar de jugador
         t.colocarBarcosAutomaticamente();
         System.out.println("Tus barcos han sido colocados automáticamente.");
-        tc.mostrarTableroPropio(t);
+        vista.dibujar(t);
 
         boolean juegoActivo = true;
         boolean miTurno = j.esServidor(); // El servidor comienza
@@ -89,9 +89,9 @@ public class JuegoBattleship {
     //modificado para implementar clase TableroConsola
     public boolean turnoLocal() throws IOException {
         System.out.println("\n=== TU TURNO ===");
-        tc.dibujar(t);
+        vista.dibujar(t);
 
-        int[] disparo = tc.obtenerDisparoJugador(t);
+        int[] disparo = vista.obtenerDisparoJugador(t);
         conexion.mandarMensaje(ProtocoloBattleship.construirMensajeDisparo(disparo[0],disparo[1]));
         String respuesta = conexion.recibirMensaje();
 
@@ -186,7 +186,7 @@ public class JuegoBattleship {
                 }
             }
             
-            tc.mostrarTableroPropio(t);
+            vista.dibujar(t);
             return true;
             
         } catch (Exception e) {

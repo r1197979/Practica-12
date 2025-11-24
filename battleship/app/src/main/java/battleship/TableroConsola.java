@@ -25,6 +25,7 @@ public class TableroConsola implements ITablero{
     }
 
     //de battleship p2p
+    @Override
     public int[] obtenerDisparoJugador(Tablero tablero) {
         while (true) {
             try {

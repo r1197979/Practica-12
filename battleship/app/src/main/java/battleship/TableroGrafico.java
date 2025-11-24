@@ -10,6 +10,11 @@ public class TableroGrafico implements ITablero{
     public void dibujar(Tablero tablero) {
         
     }
+
+    @Override
+    public int[] obtenerDisparoJugador(Tablero tablero){
+        return null;
+    }
     
     
 }

@@ -53,4 +53,19 @@ public class ProtocoloBattleshipTest {
         assertEquals(9,mensaje2.x);
         assertEquals(0,mensaje2.y);
     }
+
+    @Test
+    void testConstruirMensajeDisparo2() {
+        
+    }
+
+    @Test
+    void testConstruirMensajeResultado2() {
+        
+    }
+
+    @Test
+    void testParsearMensaje2() {
+        
+    }
 }

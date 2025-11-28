@@ -1,24 +1,60 @@
 package battleship;
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-        TableroConsola ui = new TableroConsola();
-        int modo= ui.elegirModo();
-        String nombre= ui.obtenerNombreJugador();
 
-        boolean esServidor= (modo ==1);
-        Jugador jugador= new Jugador(nombre, esServidor);
-        Tablero tablero= new Tablero();
-        Conexion conexion= new Conexion();
-    
-        JuegoBattleship juego= new JuegoBattleship(tablero, conexion, ui);
-        
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("===== BATTLESHIP =====");
+        System.out.println("Elige el modo de juego:");
+        System.out.println("1) Consola");
+        System.out.println("2) Gráfico");
+        System.out.print("Opcion: ");
+        int opcion = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Ingresa tu nombre: ");
+        String nombre = sc.nextLine();
+        System.out.print("¿Eres servidor? (s/n): ");
+        boolean esServidor = sc.nextLine().equalsIgnoreCase("s");
+
+        String ip = null;
+        if (!esServidor) {
+            System.out.print("Ingresa la IP del servidor: ");
+            ip = sc.nextLine();
+        }
+
+        Tablero tablero = new Tablero();
+        Jugador jugador = new Jugador(nombre, esServidor);
+        Conexion conexion = new Conexion();
+        ITablero vista;
+
+        if(opcion==1){
+            vista= new TableroConsola(sc);
+        }else{
+            vista= new TableroGrafico();
+        }
+
         try {
-            System.out.println("Iniciando juego...");
+            if (esServidor) {
+                System.out.println("Esperando conexión...");
+                conexion.esperarConexion();
+            } else {
+                System.out.println("Conectando a " + ip + "...");
+                conexion.conectarAPartida(ip);
+            }
+
+            JuegoBattleship juego = new JuegoBattleship(tablero, conexion, vista, jugador);
+            juego.intercambiarNombres();
             juego.iniciarJuego();
+
         } catch (Exception e) {
-            System.err.println("Error");
+            e.printStackTrace();
+        } finally {
+            conexion.cerrarConexion();
         }
     }
 }

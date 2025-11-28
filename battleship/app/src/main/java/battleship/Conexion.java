@@ -15,10 +15,10 @@ public class Conexion {
     private ServerSocket serverSocket;
     private PrintWriter salida;
     private BufferedReader entrada;
-    private Scanner scanner;
+    //private Scanner scanner;
 
     public Conexion(){
-        scanner= new Scanner(System.in);
+        //scanner= new Scanner(System.in);
     }
 
     public void esperarConexion() {
@@ -36,10 +36,10 @@ public class Conexion {
         }
     }
 
-    public void conectarAPartida() {
+    public void conectarAPartida(String ip) {
         try {
-            System.out.print("\nIngresa la IP del otro jugador: ");
-            String ip = scanner.nextLine();
+            //System.out.print("\nIngresa la IP del otro jugador: ");
+            //String ip = scanner.nextLine();
 
             System.out.println("Conectando a " + ip + ":" + PUERTO + "...");
             socket = new Socket(ip, PUERTO);
@@ -51,11 +51,11 @@ public class Conexion {
 
         } catch (IOException e) {
             System.err.println("Error al conectar: " + e.getMessage());
-            System.out.println("¿Deseas intentar nuevamente? (s/n)");
-            String respuesta = scanner.nextLine();
-            if (respuesta.equalsIgnoreCase("s")) {
-                conectarAPartida();
-            }
+            //System.out.println("¿Deseas intentar nuevamente? (s/n)");
+            //String respuesta = scanner.nextLine();
+            //if (respuesta.equalsIgnoreCase("s")) {
+            //    conectarAPartida();
+            //}
         }
     }
 
@@ -74,7 +74,7 @@ public class Conexion {
                 socket.close();
             if (serverSocket != null)
                 serverSocket.close();
-            scanner.close();
+            //scanner.close();
             System.out.println("Conexión cerrada.");
         } catch (IOException e) {
             System.err.println("Error al cerrar conexión: " + e.getMessage());

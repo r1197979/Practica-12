@@ -6,8 +6,8 @@ public class TableroConsola implements ITablero{
     
     private Scanner scanner;
     
-    public TableroConsola(){
-        scanner= new Scanner(System.in);
+    public TableroConsola(Scanner s){
+        scanner= s;
     }
 
     public int elegirModo() {
@@ -95,5 +95,11 @@ public class TableroConsola implements ITablero{
     public void dibujar(Tablero tablero){
         mostrarTableroEnemigo(tablero);
         mostrarTableroPropio(tablero);
+    }
+
+
+    public String obtenerIpOponente(){
+        System.out.println("\nIngresa la IP del otro jugador: ");
+        return scanner.nextLine();
     }
 }

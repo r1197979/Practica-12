@@ -8,10 +8,11 @@ public class JuegoBattleship {
     private ITablero vista;
     private Jugador j;
 
-    public JuegoBattleship(Tablero t,  Conexion c, ITablero vista){
+    public JuegoBattleship(Tablero t,  Conexion c, ITablero vista, Jugador j){
         this.t= t;
         conexion= c;
         this.vista = vista;
+        this.j= j;
     }
     //metodos de battleship p2p
 
